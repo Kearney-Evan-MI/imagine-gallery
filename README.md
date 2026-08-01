@@ -2,6 +2,9 @@
 
 Personal library for Grok Imagine assets, consistent characters, prompts, and generation history.
 
+**Live Gallery (once Pages is enabled):**  
+https://kearney-evan-mi.github.io/imagine-gallery/
+
 ## Current Series: Green-Eyed Woman
 
 Young woman with:
@@ -23,4 +26,12 @@ Young woman with:
 ## Structure
 - `characters/green-eyed-woman/` – bible, refs, prompts, gens
 - `sessions/` – dated chat logs
-- Future: GitHub Pages gallery, Actions for automation
+- `docs/` – GitHub Pages gallery source
+
+## Enabling the Gallery Site
+1. Go to the repo → **Settings** → **Pages**
+2. Under “Build and deployment” → Source: **Deploy from a branch**
+3. Branch: `main` / folder: `/docs`
+4. Save. The site will be live at the URL above within a few minutes.
+
+> Note: Private repositories require a paid GitHub plan for GitHub Pages. If the site doesn’t appear, either make the repo public or upgrade the account.
