@@ -44,7 +44,7 @@ header h1 {
 
 main {
   flex: 1;
-  max-width: 720px;
+  max-width: 900px;
   margin: 0 auto;
   padding: 2.5rem 1.5rem;
   width: 100%;
@@ -67,6 +67,36 @@ main {
   color: var(--muted);
   font-size: 0.95rem;
   margin-bottom: 1.8rem;
+}
+
+.gallery-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1.2rem;
+  margin-bottom: 2rem;
+}
+
+.gallery-grid figure {
+  margin: 0;
+  background: #121217;
+  border-radius: 12px;
+  overflow: hidden;
+  border: 1px solid var(--border);
+}
+
+.gallery-grid img {
+  width: 100%;
+  height: auto;
+  display: block;
+  aspect-ratio: 3/2;
+  object-fit: cover;
+}
+
+.gallery-grid figcaption {
+  padding: 0.6rem 0.8rem;
+  font-size: 0.8rem;
+  color: var(--muted);
+  text-align: center;
 }
 
 .details h3 {
@@ -153,4 +183,5 @@ footer {
 @media (max-width: 600px) {
   header h1 { font-size: 1.9rem; }
   .character-card { padding: 1.5rem; }
+  .gallery-grid { grid-template-columns: 1fr 1fr; }
 }
