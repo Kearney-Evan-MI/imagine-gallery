@@ -1,5 +1,11 @@
 # Character Bible: Green-Eyed Woman
 
+**Character:** Green-Eyed Woman  
+**Current Version:** v1.0.0 (2026-08-01)  
+**Status:** Active
+
+---
+
 **Name / Alias:** (unnamed – photorealistic original character)
 
 **Core Look**
