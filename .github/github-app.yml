@@ -1,0 +1,6 @@
+name: imagine-gallery
+description: Personal library for Grok Imagine assets, consistent characters, prompts, and generation history
+
+automation:
+  auto_issue_session: true
+  remote_control: true
