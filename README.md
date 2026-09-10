@@ -35,3 +35,12 @@ Young woman with:
 4. Save. The site will be live at the URL above within a few minutes.
 
 > Note: Private repositories require a paid GitHub plan for GitHub Pages. If the site doesn’t appear, either make the repo public or upgrade the account.
+
+## Gallery performance
+The GitHub Pages site under `docs/` is tuned for mobile load speed:
+- Responsive Drive **thumbnail** URLs (`srcset` + `sizes`) instead of full-file `uc?export=view` links
+- LCP preload + `fetchpriority="high"` on the hero image; lazy-load for the rest
+- Explicit `width`/`height` and CSS `aspect-ratio` to avoid layout shift
+- `content-visibility` / `contain` to reduce off-screen paint cost on long pages
+
+For the best results, replace remote images with optimized local WebP/JPEG files in `docs/images/`.
