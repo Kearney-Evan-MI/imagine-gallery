@@ -103,6 +103,15 @@ main {
   border-color: var(--accent);
 }
 
+.gallery-grid figure.is-broken {
+  border-color: var(--border);
+}
+
+.gallery-grid figure.is-broken .post-card-badge {
+  background: var(--border);
+  color: var(--muted);
+}
+
 .post-card-link {
   display: block;
   text-decoration: none;

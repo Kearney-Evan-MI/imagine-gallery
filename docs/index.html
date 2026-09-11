@@ -3,7 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Imagine Gallery — Green-Eyed Woman</title>
+  <title>Imagine Gallery — Character Library</title>
+  <meta name="description" content="Personal Grok Imagine character library and generation gallery.">
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -13,7 +14,7 @@
   </header>
 
   <main>
-    <section class="character-card">
+    <section class="character-card" id="green-eyed-woman">
       <h2>Green-Eyed Woman</h2>
       <p class="tagline">Photorealistic original character · consistent identity lock across generations</p>
 
@@ -30,19 +31,36 @@
           <figcaption>New post images (JPEG drop pending)</figcaption>
         </figure>
         <figure>
-          <img src="https://drive.google.com/uc?export=view&id=1E7ZOisCM43JLANxJ77WEw1CzBdegdSpI" alt="Kneeling, arms outstretched – prior latest" loading="lazy">
+          <img
+            src="images/kneeling-latest.jpg"
+            data-fallback="https://drive.google.com/uc?export=view&amp;id=1E7ZOisCM43JLANxJ77WEw1CzBdegdSpI"
+            alt="Kneeling, arms outstretched – prior latest"
+            loading="lazy"
+            onerror="window.galleryImgFallback(this)">
           <figcaption>Kneeling, arms outstretched</figcaption>
         </figure>
         <figure>
-          <img src="https://drive.google.com/uc?export=view&id=1C8Iq74pIOMAcQvuOHcKhRvfVTPlYUSRJ" alt="Kneeling prior generation" loading="lazy">
+          <img
+            src="https://drive.google.com/uc?export=view&amp;id=1C8Iq74pIOMAcQvuOHcKhRvfVTPlYUSRJ"
+            alt="Kneeling prior generation"
+            loading="lazy"
+            onerror="window.galleryImgFallback(this)">
           <figcaption>Kneeling prior</figcaption>
         </figure>
         <figure>
-          <img src="https://drive.google.com/uc?export=view&id=1r6g3HKw_hpnAwHabDjDZ9Hx1Uke_uOT0" alt="Plank / hands-and-knees pose" loading="lazy">
+          <img
+            src="https://drive.google.com/uc?export=view&amp;id=1r6g3HKw_hpnAwHabDjDZ9Hx1Uke_uOT0"
+            alt="Plank / hands-and-knees pose"
+            loading="lazy"
+            onerror="window.galleryImgFallback(this)">
           <figcaption>Hands-and-knees pose</figcaption>
         </figure>
         <figure>
-          <img src="https://drive.google.com/uc?export=view&id=1KJvIO2tZKSsvoiypkw790GttbvlDcIOa" alt="Sitting on bed edge" loading="lazy">
+          <img
+            src="https://drive.google.com/uc?export=view&amp;id=1KJvIO2tZKSsvoiypkw790GttbvlDcIOa"
+            alt="Sitting on bed edge"
+            loading="lazy"
+            onerror="window.galleryImgFallback(this)">
           <figcaption>Sitting on bed edge</figcaption>
         </figure>
       </div>
@@ -78,14 +96,79 @@
       </div>
     </section>
 
+    <section class="character-card" id="new-forest-spunk">
+      <h2>New Forest Spunk</h2>
+      <p class="tagline">Hampshire / Solent / New Forest type · scrappy summer heatwave lock</p>
+
+      <div class="gallery-grid">
+        <figure class="post-card">
+          <a class="post-card-link" href="https://github.com/Kearney-Evan-MI/imagine-gallery/blob/main/characters/new-forest-spunk/character-bible.md" target="_blank" rel="noopener noreferrer">
+            <div class="post-card-body" role="img" aria-label="Image drop pending for New Forest Spunk">
+              <span class="post-card-badge">Pending media</span>
+              <span class="post-card-title">Outdoor festival set</span>
+              <span class="post-card-id">JPEG drop not committed yet</span>
+              <span class="post-card-cta">See character bible →</span>
+            </div>
+          </a>
+          <figcaption>Local web images pending · bible is source of truth</figcaption>
+        </figure>
+      </div>
+
+      <div class="details">
+        <h3>Core Look</h3>
+        <ul>
+          <li>Messy wind-blown curly-to-wavy medium brown hair</li>
+          <li>Light eyes, soft smirk / half-smile</li>
+          <li>Fair freckled skin (face, shoulders, chest)</li>
+          <li>Lean-athletic outdoor build</li>
+          <li>Summer default: light shirt tied at waist + blue jeans</li>
+        </ul>
+
+        <h3>Signature Mood</h3>
+        <p>Scrappy, free-spirited, quietly amused. Natural daylight, heatwave outdoor fields and woodland edges — candid documentary feel, not polished glamour.</p>
+      </div>
+
+      <div class="links">
+        <a href="https://github.com/Kearney-Evan-MI/imagine-gallery/blob/main/characters/new-forest-spunk/character-bible.md" target="_blank" rel="noopener noreferrer">Character Bible</a>
+        <a href="https://github.com/Kearney-Evan-MI/imagine-gallery/blob/main/characters/new-forest-spunk/versions/v1.0.0.md" target="_blank" rel="noopener noreferrer">v1.0.0</a>
+        <a href="https://github.com/Kearney-Evan-MI/imagine-gallery" target="_blank" rel="noopener noreferrer">Full Repo</a>
+      </div>
+    </section>
+
     <section class="note">
       <p><strong>How to use with Grok:</strong> Tag <code>@ff0116d1-7647-49a9-a4a1-7c05b5e80c7f</code> plus the original refs, or say “use the green-eyed woman from my imagine-gallery repo”.</p>
-      <p>New post images are cataloged by UUID; drop downloaded JPEGs into <code>docs/images/</code> (and enable Git LFS for full-resolution originals) to replace the temporary Grok post card with self-hosted thumbnails. Older frames remain on Google Drive until migrated.</p>
+      <p>New post images are cataloged by UUID; drop downloaded JPEGs into <code>docs/images/</code> (and enable Git LFS for full-resolution originals) to replace temporary cards with self-hosted thumbnails. Older frames may still resolve from Google Drive until migrated; broken remote hotlinks fall back to a local placeholder card.</p>
+      <p><strong>Live site:</strong> <a href="https://kearney-evan-mi.github.io/imagine-gallery/">kearney-evan-mi.github.io/imagine-gallery</a> (deployed from <code>docs/</code> via GitHub Actions).</p>
     </section>
   </main>
 
   <footer>
     <p>Built with Grok Imagine · Character archive</p>
   </footer>
+
+  <script>
+    window.galleryImgFallback = function (img) {
+      if (!img || img.dataset.fallbackApplied === "1") return;
+      var next = img.getAttribute("data-fallback");
+      if (next && img.dataset.fallbackTried !== "1") {
+        img.dataset.fallbackTried = "1";
+        img.src = next;
+        return;
+      }
+      img.dataset.fallbackApplied = "1";
+      var figure = img.closest("figure");
+      if (!figure) return;
+      figure.classList.add("post-card", "is-broken");
+      var label = img.getAttribute("alt") || "Image unavailable";
+      var safeLabel = label.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/"/g, "&quot;");
+      figure.innerHTML =
+        '<div class="post-card-body" role="img" aria-label="' + safeLabel + '">' +
+        '<span class="post-card-badge">Offline media</span>' +
+        '<span class="post-card-title">Thumbnail unavailable</span>' +
+        '<span class="post-card-id">Drop JPEG into docs/images</span>' +
+        "</div>" +
+        "<figcaption>" + safeLabel + "</figcaption>";
+    };
+  </script>
 </body>
 </html>
