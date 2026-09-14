@@ -64,6 +64,14 @@
       body.appendChild(badge);
       body.appendChild(title);
       body.appendChild(hint);
+
+      var link = figure.querySelector("a");
+      if (link) {
+        link.replaceChildren(body);
+        figure.replaceChildren(link, caption);
+        return;
+      }
+
       figure.replaceChildren(body, caption);
     };
   </script>
@@ -108,7 +116,7 @@
           <figcaption>Kneeling, arms outstretched (latest)</figcaption>
         </figure>
         <figure class="post-card">
-          <a class="post-card-link" href="https://grok.com/imagine/post/ff0116d1-7647-49a9-a4a1-7c05b5e80c7f" target="_blank" rel="noopener noreferrer">
+          <a class="post-card-link" href="https://grok.com/imagine/post/ff0116d1-7647-49a9-a4a1-7c05b5e80c7f" target="_blank" rel="noopener noreferrer" aria-label="Grok post set on Grok (opens in new tab)">
             <div class="post-card-body">
               <span class="post-card-badge">New · 2026-09-11</span>
               <span class="post-card-title">Grok post set</span>
@@ -212,7 +220,7 @@
 
       <div class="gallery-grid">
         <figure class="post-card">
-          <a class="post-card-link" href="https://github.com/Kearney-Evan-MI/imagine-gallery/blob/main/characters/new-forest-spunk/character-bible.md" target="_blank" rel="noopener noreferrer">
+          <a class="post-card-link" href="https://github.com/Kearney-Evan-MI/imagine-gallery/blob/main/characters/new-forest-spunk/character-bible.md" target="_blank" rel="noopener noreferrer" aria-label="New Forest Spunk character bible on GitHub (opens in new tab)">
             <div class="post-card-body">
               <span class="post-card-badge">Pending media</span>
               <span class="post-card-title">Outdoor festival set</span>
