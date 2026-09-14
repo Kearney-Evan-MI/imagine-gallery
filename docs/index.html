@@ -12,7 +12,17 @@
   <link rel="preconnect" href="https://drive.google.com" crossorigin>
 
   <!-- Preload LCP candidate (first gallery image, mobile-friendly width) -->
-  <link rel="preload" as="image" href="https://drive.google.com/thumbnail?id=1E7ZOisCM43JLANxJ77WEw1CzBdegdSpI&sz=w800" fetchpriority="high">
+  <link
+    rel="preload"
+    as="image"
+    href="https://drive.google.com/thumbnail?id=1E7ZOisCM43JLANxJ77WEw1CzBdegdSpI&sz=w800"
+    imagesrcset="
+      https://drive.google.com/thumbnail?id=1E7ZOisCM43JLANxJ77WEw1CzBdegdSpI&sz=w400 400w,
+      https://drive.google.com/thumbnail?id=1E7ZOisCM43JLANxJ77WEw1CzBdegdSpI&sz=w800 800w,
+      https://drive.google.com/thumbnail?id=1E7ZOisCM43JLANxJ77WEw1CzBdegdSpI&sz=w1200 1200w
+    "
+    imagesizes="(max-width: 600px) 50vw, (max-width: 900px) 33vw, 280px"
+    fetchpriority="high">
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -205,6 +215,8 @@
       var next = img.getAttribute("data-fallback");
       if (next && img.dataset.fallbackTried !== "1") {
         img.dataset.fallbackTried = "1";
+        img.removeAttribute("srcset");
+        img.removeAttribute("sizes");
         img.src = next;
         return;
       }
