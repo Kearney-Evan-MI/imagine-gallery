@@ -33,6 +33,19 @@ Hampshire / Solent outdoor lock (messy curly hair, freckles, soft smirk, heatwav
 - `characters/new-forest-spunk/` – bible + version notes
 - `sessions/` – dated chat logs
 - `docs/` – GitHub Pages gallery source
+- `integrations/grok-imagine-toolkit/` – imported xAI Grok Imagine image/video toolkit
+
+## Grok Imagine toolkit
+
+The referenced `pattalkslaw-del/grok-imagine-toolkit` release is included under
+`integrations/grok-imagine-toolkit/` as a disjoint subtree, so it does not
+overwrite the gallery's existing files. Its upstream MIT license and usage
+documentation are included alongside the scripts.
+
+The import source is commit
+[`1013da76c74de1e2aa9fcde3583ef38dd2531910`](https://github.com/pattalkslaw-del/grok-imagine-toolkit/commit/1013da76c74de1e2aa9fcde3583ef38dd2531910).
+Run the toolkit commands from that directory and configure `XAI_API_KEY`
+locally; do not commit credentials.
 
 ## Enabling / deploying the Gallery Site
 
