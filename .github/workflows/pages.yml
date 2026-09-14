@@ -10,8 +10,8 @@ on:
     branches: ["main"]
     paths:
       - "docs/**"
-      - "characters/green-eyed-woman/**/*.md"
-      - "characters/new-forest-spunk/**/*.md"
+      - "characters/green-eyed-woman/**"
+      - "characters/new-forest-spunk/**"
       - "sessions/**/*.md"
       - "README.md"
       - "NEXT-STEPS.md"
