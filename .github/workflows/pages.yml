@@ -10,6 +10,8 @@ on:
     branches: ["main"]
     paths:
       - "docs/**"
+      - "characters/**"
+      - "sessions/**"
       - ".github/workflows/pages.yml"
   workflow_dispatch:
 
