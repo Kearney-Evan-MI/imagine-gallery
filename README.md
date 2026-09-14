@@ -2,7 +2,7 @@
 
 Personal library for Grok Imagine assets, consistent characters, prompts, and generation history.
 
-**Live Gallery (once Pages is enabled):**  
+**Live Gallery:**
 https://kearney-evan-mi.github.io/imagine-gallery/
 
 ## Current Series: Green-Eyed Woman
@@ -16,7 +16,12 @@ Young woman with:
 
 ### Key Assets (UUIDs from Grok Imagine)
 - Original refs: `@8474ea85-0287-4877-a905-f0b848b40eea`, `@a4d36878-e1aa-4610-a567-0e1caf9e55fd`, `@6ef8dfcf-188a-48df-8f89-b3aae3867443`, `@0dce1ee3-8f0f-4363-a1e0-1a595f35a454`
-- Latest kneeling pose: `@6a1a0a3d-eca0-4f3b-b2f2-8752bdda856b` (and previous `@7f08a2b1-97cc-4d8e-bd88-62535eea6cc4`)
+- **Latest post set (2026-09-11):** `@ff0116d1-7647-49a9-a4a1-7c05b5e80c7f` — [Grok Imagine post](https://grok.com/imagine/post/ff0116d1-7647-49a9-a4a1-7c05b5e80c7f)
+- Prior kneeling pose: `@6a1a0a3d-eca0-4f3b-b2f2-8752bdda856b` (and previous `@7f08a2b1-97cc-4d8e-bd88-62535eea6cc4`)
+
+## Also active: New Forest Spunk
+
+Hampshire / Solent outdoor lock (messy curly hair, freckles, soft smirk, heatwave jeans look). See `characters/new-forest-spunk/`.
 
 ## How to use with Grok
 1. Tag the UUIDs or say “use the green-eyed woman from my imagine-gallery repo”
@@ -25,14 +30,19 @@ Young woman with:
 
 ## Structure
 - `characters/green-eyed-woman/` – bible, refs, prompts, gens
+- `characters/new-forest-spunk/` – bible + version notes
 - `sessions/` – dated chat logs
 - `docs/` – GitHub Pages gallery source
 
-## Enabling the Gallery Site
-1. Go to the repo → **Settings** → **Pages**
-2. Under “Build and deployment” → Source: **Deploy from a branch**
-3. Branch: `main` / folder: `/docs`
-4. Save. The site will be live at the URL above within a few minutes.
+## Enabling / deploying the Gallery Site
+
+The site is built from the static files in `docs/` and deployed by [`.github/workflows/pages.yml`](.github/workflows/pages.yml) on every push to `main` that touches `docs/` (or via **Actions → Deploy GitHub Pages → Run workflow**).
+
+**One-time repo setting (required once):**
+1. Repo → **Settings** → **Pages**
+2. Under **Build and deployment** → **Source**: choose **GitHub Actions**
+3. Save. The next successful `Deploy GitHub Pages` run publishes
+   https://kearney-evan-mi.github.io/imagine-gallery/
 
 > Note: Private repositories require a paid GitHub plan for GitHub Pages. If the site doesn’t appear, either make the repo public or upgrade the account.
 
@@ -44,3 +54,10 @@ The GitHub Pages site under `docs/` is tuned for mobile load speed:
 - `content-visibility` / `contain` to reduce off-screen paint cost on long pages
 
 For the best results, replace remote images with optimized local WebP/JPEG files in `docs/images/`.
+
+### Local preview
+Open `docs/index.html` in a browser, or serve the folder:
+
+```bash
+python3 -m http.server --directory docs 8080
+```
