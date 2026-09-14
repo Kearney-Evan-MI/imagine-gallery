@@ -3,9 +3,78 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Imagine Gallery — Grok Imagine character library and generation gallery.">
+  <meta name="theme-color" content="#0f0f12">
   <title>Imagine Gallery — Character Library</title>
-  <meta name="description" content="Personal Grok Imagine character library and generation gallery.">
+
+  <!-- Faster DNS/TLS for remote image host (temporary until assets are self-hosted) -->
+  <link rel="dns-prefetch" href="https://drive.google.com">
+  <link rel="preconnect" href="https://drive.google.com" crossorigin>
+
+  <!-- Preload LCP candidate (first gallery image, mobile-friendly width) -->
+  <link
+    rel="preload"
+    as="image"
+    href="https://drive.google.com/thumbnail?id=1E7ZOisCM43JLANxJ77WEw1CzBdegdSpI&sz=w800"
+    imagesrcset="
+      https://drive.google.com/thumbnail?id=1E7ZOisCM43JLANxJ77WEw1CzBdegdSpI&sz=w400 400w,
+      https://drive.google.com/thumbnail?id=1E7ZOisCM43JLANxJ77WEw1CzBdegdSpI&sz=w800 800w,
+      https://drive.google.com/thumbnail?id=1E7ZOisCM43JLANxJ77WEw1CzBdegdSpI&sz=w1200 1200w
+    "
+    imagesizes="(max-width: 600px) 50vw, (max-width: 900px) 33vw, 280px"
+    fetchpriority="high">
   <link rel="stylesheet" href="style.css">
+  <script>
+    window.galleryImgFallback = function (img) {
+      if (!img || img.dataset.fallbackApplied === "1") return;
+      var next = img.getAttribute("data-fallback");
+      if (next && img.dataset.fallbackTried !== "1") {
+        img.dataset.fallbackTried = "1";
+        img.removeAttribute("data-fallback");
+        img.removeAttribute("srcset");
+        img.removeAttribute("sizes");
+        img.src = next;
+        return;
+      }
+      img.dataset.fallbackApplied = "1";
+      var figure = img.closest("figure");
+      if (!figure) return;
+      figure.classList.add("post-card", "is-broken");
+      var label = img.getAttribute("alt") || "Image unavailable";
+      var body = document.createElement("div");
+      body.className = "post-card-body";
+      body.setAttribute("role", "img");
+      body.setAttribute("aria-label", label);
+
+      var badge = document.createElement("span");
+      badge.className = "post-card-badge";
+      badge.textContent = "Offline media";
+
+      var title = document.createElement("span");
+      title.className = "post-card-title";
+      title.textContent = "Thumbnail unavailable";
+
+      var hint = document.createElement("span");
+      hint.className = "post-card-id";
+      hint.textContent = "Drop JPEG into docs/images";
+
+      var caption = document.createElement("figcaption");
+      caption.textContent = label;
+
+      body.appendChild(badge);
+      body.appendChild(title);
+      body.appendChild(hint);
+
+      var link = figure.querySelector("a");
+      if (link) {
+        link.replaceChildren(body);
+        figure.replaceChildren(link, caption);
+        return;
+      }
+
+      figure.replaceChildren(body, caption);
+    };
+  </script>
 </head>
 <body>
   <header>
@@ -18,48 +87,96 @@
       <h2>Green-Eyed Woman</h2>
       <p class="tagline">Photorealistic original character · consistent identity lock across generations</p>
 
+      <!--
+        Performance notes:
+        - First image is eager + fetchpriority=high (LCP).
+        - Remaining images lazy-load + async decode.
+        - width/height + CSS aspect-ratio prevent CLS.
+        - thumbnail URLs reduce bytes vs full Drive "uc?export=view" files.
+        - sizes matches the gallery grid so the browser picks a small enough candidate.
+      -->
       <div class="gallery-grid">
+        <figure>
+          <img
+            src="https://drive.google.com/thumbnail?id=1E7ZOisCM43JLANxJ77WEw1CzBdegdSpI&sz=w800"
+            srcset="
+              https://drive.google.com/thumbnail?id=1E7ZOisCM43JLANxJ77WEw1CzBdegdSpI&sz=w400 400w,
+              https://drive.google.com/thumbnail?id=1E7ZOisCM43JLANxJ77WEw1CzBdegdSpI&sz=w800 800w,
+              https://drive.google.com/thumbnail?id=1E7ZOisCM43JLANxJ77WEw1CzBdegdSpI&sz=w1200 1200w
+            "
+            sizes="(max-width: 600px) 50vw, (max-width: 900px) 33vw, 280px"
+            width="800"
+            height="533"
+            alt="Kneeling, arms outstretched – latest"
+            data-fallback="images/placeholder.png"
+            loading="eager"
+            decoding="async"
+            fetchpriority="high"
+            onerror="window.galleryImgFallback(this)">
+          <figcaption>Kneeling, arms outstretched (latest)</figcaption>
+        </figure>
         <figure class="post-card">
-          <a class="post-card-link" href="https://grok.com/imagine/post/ff0116d1-7647-49a9-a4a1-7c05b5e80c7f" target="_blank" rel="noopener noreferrer">
-            <div class="post-card-body" role="img" aria-label="New Grok Imagine post set – open on Grok">
+          <a class="post-card-link" href="https://grok.com/imagine/post/ff0116d1-7647-49a9-a4a1-7c05b5e80c7f" target="_blank" rel="noopener noreferrer" aria-label="Grok post set on Grok (opens in new tab)">
+            <div class="post-card-body">
               <span class="post-card-badge">New · 2026-09-11</span>
               <span class="post-card-title">Grok post set</span>
               <span class="post-card-id">ff0116d1…0c7f</span>
-              <span class="post-card-cta">Open on Grok →</span>
+              <span class="post-card-cta">Open on Grok (opens in new tab) →</span>
             </div>
           </a>
           <figcaption>New post images (JPEG drop pending)</figcaption>
         </figure>
         <figure>
           <img
-            src="images/kneeling-latest.jpg"
-            data-fallback="https://drive.google.com/uc?export=view&amp;id=1E7ZOisCM43JLANxJ77WEw1CzBdegdSpI"
-            alt="Kneeling, arms outstretched – prior latest"
-            loading="lazy"
-            onerror="window.galleryImgFallback(this)">
-          <figcaption>Kneeling, arms outstretched</figcaption>
-        </figure>
-        <figure>
-          <img
-            src="https://drive.google.com/uc?export=view&amp;id=1C8Iq74pIOMAcQvuOHcKhRvfVTPlYUSRJ"
+            src="https://drive.google.com/thumbnail?id=1C8Iq74pIOMAcQvuOHcKhRvfVTPlYUSRJ&sz=w800"
+            srcset="
+              https://drive.google.com/thumbnail?id=1C8Iq74pIOMAcQvuOHcKhRvfVTPlYUSRJ&sz=w400 400w,
+              https://drive.google.com/thumbnail?id=1C8Iq74pIOMAcQvuOHcKhRvfVTPlYUSRJ&sz=w800 800w,
+              https://drive.google.com/thumbnail?id=1C8Iq74pIOMAcQvuOHcKhRvfVTPlYUSRJ&sz=w1200 1200w
+            "
+            sizes="(max-width: 600px) 50vw, (max-width: 900px) 33vw, 280px"
+            width="800"
+            height="533"
             alt="Kneeling prior generation"
+            data-fallback="images/placeholder.png"
             loading="lazy"
+            decoding="async"
             onerror="window.galleryImgFallback(this)">
           <figcaption>Kneeling prior</figcaption>
         </figure>
         <figure>
           <img
-            src="https://drive.google.com/uc?export=view&amp;id=1r6g3HKw_hpnAwHabDjDZ9Hx1Uke_uOT0"
+            src="https://drive.google.com/thumbnail?id=1r6g3HKw_hpnAwHabDjDZ9Hx1Uke_uOT0&sz=w800"
+            srcset="
+              https://drive.google.com/thumbnail?id=1r6g3HKw_hpnAwHabDjDZ9Hx1Uke_uOT0&sz=w400 400w,
+              https://drive.google.com/thumbnail?id=1r6g3HKw_hpnAwHabDjDZ9Hx1Uke_uOT0&sz=w800 800w,
+              https://drive.google.com/thumbnail?id=1r6g3HKw_hpnAwHabDjDZ9Hx1Uke_uOT0&sz=w1200 1200w
+            "
+            sizes="(max-width: 600px) 50vw, (max-width: 900px) 33vw, 280px"
+            width="800"
+            height="533"
             alt="Plank / hands-and-knees pose"
+            data-fallback="images/placeholder.png"
             loading="lazy"
+            decoding="async"
             onerror="window.galleryImgFallback(this)">
           <figcaption>Hands-and-knees pose</figcaption>
         </figure>
         <figure>
           <img
-            src="https://drive.google.com/uc?export=view&amp;id=1KJvIO2tZKSsvoiypkw790GttbvlDcIOa"
+            src="https://drive.google.com/thumbnail?id=1KJvIO2tZKSsvoiypkw790GttbvlDcIOa&sz=w800"
+            srcset="
+              https://drive.google.com/thumbnail?id=1KJvIO2tZKSsvoiypkw790GttbvlDcIOa&sz=w400 400w,
+              https://drive.google.com/thumbnail?id=1KJvIO2tZKSsvoiypkw790GttbvlDcIOa&sz=w800 800w,
+              https://drive.google.com/thumbnail?id=1KJvIO2tZKSsvoiypkw790GttbvlDcIOa&sz=w1200 1200w
+            "
+            sizes="(max-width: 600px) 50vw, (max-width: 900px) 33vw, 280px"
+            width="800"
+            height="533"
             alt="Sitting on bed edge"
+            data-fallback="images/placeholder.png"
             loading="lazy"
+            decoding="async"
             onerror="window.galleryImgFallback(this)">
           <figcaption>Sitting on bed edge</figcaption>
         </figure>
@@ -83,13 +200,14 @@
           <li><code>ff0116d1-7647-49a9-a4a1-7c05b5e80c7f</code> — New post set (2026-09-11) · <a href="https://grok.com/imagine/post/ff0116d1-7647-49a9-a4a1-7c05b5e80c7f" target="_blank" rel="noopener noreferrer">open post</a></li>
           <li><code>6a1a0a3d-eca0-4f3b-b2f2-8752bdda856b</code> — Kneeling, arms outstretched</li>
           <li><code>7f08a2b1-97cc-4d8e-bd88-62535eea6cc4</code> — Kneeling, arms outstretched (prior)</li>
-          <li>Original 4 references also in conversation history</li>
+          <li>Original refs: <code>@8474ea85-0287-4877-a905-f0b848b40eea</code>, <code>@a4d36878-e1aa-4610-a567-0e1caf9e55fd</code>, <code>@6ef8dfcf-188a-48df-8f89-b3aae3867443</code>, <code>@0dce1ee3-8f0f-4363-a1e0-1a595f35a454</code></li>
         </ul>
       </div>
 
       <div class="links">
         <a href="https://github.com/Kearney-Evan-MI/imagine-gallery/blob/main/characters/green-eyed-woman/character-bible.md" target="_blank" rel="noopener noreferrer">Character Bible</a>
         <a href="https://github.com/Kearney-Evan-MI/imagine-gallery/blob/main/characters/green-eyed-woman/prompts/kneeling-arms-outstretched.md" target="_blank" rel="noopener noreferrer">Exact Prompt</a>
+        <a href="https://github.com/Kearney-Evan-MI/imagine-gallery/blob/main/sessions/2026-08-01-green-eyed-woman.md" target="_blank" rel="noopener noreferrer">Session Log</a>
         <a href="https://github.com/Kearney-Evan-MI/imagine-gallery/blob/main/sessions/2026-09-11-grok-post-ff0116d1.md" target="_blank" rel="noopener noreferrer">Latest Session</a>
         <a href="https://grok.com/imagine/post/ff0116d1-7647-49a9-a4a1-7c05b5e80c7f" target="_blank" rel="noopener noreferrer">Grok Post</a>
         <a href="https://github.com/Kearney-Evan-MI/imagine-gallery" target="_blank" rel="noopener noreferrer">Full Repo</a>
@@ -102,12 +220,12 @@
 
       <div class="gallery-grid">
         <figure class="post-card">
-          <a class="post-card-link" href="https://github.com/Kearney-Evan-MI/imagine-gallery/blob/main/characters/new-forest-spunk/character-bible.md" target="_blank" rel="noopener noreferrer">
-            <div class="post-card-body" role="img" aria-label="Image drop pending for New Forest Spunk">
+          <a class="post-card-link" href="https://github.com/Kearney-Evan-MI/imagine-gallery/blob/main/characters/new-forest-spunk/character-bible.md" target="_blank" rel="noopener noreferrer" aria-label="New Forest Spunk character bible on GitHub (opens in new tab)">
+            <div class="post-card-body">
               <span class="post-card-badge">Pending media</span>
               <span class="post-card-title">Outdoor festival set</span>
               <span class="post-card-id">JPEG drop not committed yet</span>
-              <span class="post-card-cta">See character bible →</span>
+              <span class="post-card-cta">See character bible (opens in new tab) →</span>
             </div>
           </a>
           <figcaption>Local web images pending · bible is source of truth</figcaption>
@@ -136,8 +254,8 @@
     </section>
 
     <section class="note">
-      <p><strong>How to use with Grok:</strong> Tag <code>@ff0116d1-7647-49a9-a4a1-7c05b5e80c7f</code> plus the original refs, or say “use the green-eyed woman from my imagine-gallery repo”.</p>
-      <p>New post images are cataloged by UUID; drop downloaded JPEGs into <code>docs/images/</code> (and enable Git LFS for full-resolution originals) to replace temporary cards with self-hosted thumbnails. Older frames may still resolve from Google Drive until migrated; broken remote hotlinks fall back to a local placeholder card.</p>
+      <p><strong>How to use with Grok:</strong> Tag <code>@ff0116d1-7647-49a9-a4a1-7c05b5e80c7f</code> plus the original refs listed above, or say <code>use the green-eyed woman from my imagine-gallery repo</code>.</p>
+      <p>Images are loaded via sized Google Drive thumbnails for faster mobile loads. Drop downloaded JPEGs into <code>docs/images/</code> (and enable Git LFS for full-resolution originals) to replace temporary cards and remote thumbnails with self-hosted assets.</p>
       <p><strong>Live site:</strong> <a href="https://kearney-evan-mi.github.io/imagine-gallery/">kearney-evan-mi.github.io/imagine-gallery</a> (deployed from <code>docs/</code> via GitHub Actions).</p>
     </section>
   </main>
@@ -145,30 +263,5 @@
   <footer>
     <p>Built with Grok Imagine · Character archive</p>
   </footer>
-
-  <script>
-    window.galleryImgFallback = function (img) {
-      if (!img || img.dataset.fallbackApplied === "1") return;
-      var next = img.getAttribute("data-fallback");
-      if (next && img.dataset.fallbackTried !== "1") {
-        img.dataset.fallbackTried = "1";
-        img.src = next;
-        return;
-      }
-      img.dataset.fallbackApplied = "1";
-      var figure = img.closest("figure");
-      if (!figure) return;
-      figure.classList.add("post-card", "is-broken");
-      var label = img.getAttribute("alt") || "Image unavailable";
-      var safeLabel = label.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/"/g, "&quot;");
-      figure.innerHTML =
-        '<div class="post-card-body" role="img" aria-label="' + safeLabel + '">' +
-        '<span class="post-card-badge">Offline media</span>' +
-        '<span class="post-card-title">Thumbnail unavailable</span>' +
-        '<span class="post-card-id">Drop JPEG into docs/images</span>' +
-        "</div>" +
-        "<figcaption>" + safeLabel + "</figcaption>";
-    };
-  </script>
 </body>
 </html>

@@ -2,7 +2,7 @@
 
 Personal library for Grok Imagine assets, consistent characters, prompts, and generation history.
 
-**Live Gallery:**  
+**Live Gallery:**
 https://kearney-evan-mi.github.io/imagine-gallery/
 
 ## Current Series: Green-Eyed Woman
@@ -41,10 +41,19 @@ The site is built from the static files in `docs/` and deployed by [`.github/wor
 **One-time repo setting (required once):**
 1. Repo → **Settings** → **Pages**
 2. Under **Build and deployment** → **Source**: choose **GitHub Actions**
-3. Save. The next successful `Deploy GitHub Pages` run publishes  
+3. Save. The next successful `Deploy GitHub Pages` run publishes
    https://kearney-evan-mi.github.io/imagine-gallery/
 
 > Note: Private repositories require a paid GitHub plan for GitHub Pages. If the site doesn’t appear, either make the repo public or upgrade the account.
+
+## Gallery performance
+The GitHub Pages site under `docs/` is tuned for mobile load speed:
+- Responsive Drive **thumbnail** URLs (`srcset` + `sizes`) instead of full-file `uc?export=view` links
+- LCP preload + `fetchpriority="high"` on the hero image; lazy-load for the rest
+- Explicit `width`/`height` and CSS `aspect-ratio` to avoid layout shift
+- `content-visibility` / `contain` to reduce off-screen paint cost on long pages
+
+For the best results, replace remote images with optimized local WebP/JPEG files in `docs/images/`.
 
 ### Local preview
 Open `docs/index.html` in a browser, or serve the folder:

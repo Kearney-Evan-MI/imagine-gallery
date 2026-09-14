@@ -10,6 +10,11 @@ on:
     branches: ["main"]
     paths:
       - "docs/**"
+      - "characters/green-eyed-woman/**"
+      - "characters/new-forest-spunk/**"
+      - "sessions/**/*.md"
+      - "README.md"
+      - "NEXT-STEPS.md"
       - ".github/workflows/pages.yml"
   workflow_dispatch:
 
@@ -19,7 +24,7 @@ permissions:
   id-token: write
 
 concurrency:
-  group: pages
+  group: ${{ github.workflow }}-${{ github.ref }}
   cancel-in-progress: false
 
 jobs:
