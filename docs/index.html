@@ -227,6 +227,8 @@
       var label = img.getAttribute("alt") || "Image unavailable";
       var body = document.createElement("div");
       body.className = "post-card-body";
+      body.setAttribute("role", "img");
+      body.setAttribute("aria-label", label);
 
       var badge = document.createElement("span");
       badge.className = "post-card-badge";
