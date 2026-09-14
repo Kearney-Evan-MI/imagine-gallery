@@ -13,6 +13,8 @@ on:
       - "characters/green-eyed-woman/**/*.md"
       - "characters/new-forest-spunk/**/*.md"
       - "sessions/**/*.md"
+      - "README.md"
+      - "NEXT-STEPS.md"
       - ".github/workflows/pages.yml"
   workflow_dispatch:
 
