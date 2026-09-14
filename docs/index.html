@@ -55,7 +55,7 @@
         </figure>
         <figure class="post-card">
           <a class="post-card-link" href="https://grok.com/imagine/post/ff0116d1-7647-49a9-a4a1-7c05b5e80c7f" target="_blank" rel="noopener noreferrer">
-            <div class="post-card-body" role="img" aria-label="New Grok Imagine post set – open on Grok">
+            <div class="post-card-body">
               <span class="post-card-badge">New · 2026-09-11</span>
               <span class="post-card-title">Grok post set</span>
               <span class="post-card-id">ff0116d1…0c7f</span>
@@ -156,7 +156,7 @@
       <div class="gallery-grid">
         <figure class="post-card">
           <a class="post-card-link" href="https://github.com/Kearney-Evan-MI/imagine-gallery/blob/main/characters/new-forest-spunk/character-bible.md" target="_blank" rel="noopener noreferrer">
-            <div class="post-card-body" role="img" aria-label="Image drop pending for New Forest Spunk">
+            <div class="post-card-body">
               <span class="post-card-badge">Pending media</span>
               <span class="post-card-title">Outdoor festival set</span>
               <span class="post-card-id">JPEG drop not committed yet</span>
@@ -213,14 +213,28 @@
       if (!figure) return;
       figure.classList.add("post-card", "is-broken");
       var label = img.getAttribute("alt") || "Image unavailable";
-      var safeLabel = label.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/"/g, "&quot;");
-      figure.innerHTML =
-        '<div class="post-card-body" role="img" aria-label="' + safeLabel + '">' +
-        '<span class="post-card-badge">Offline media</span>' +
-        '<span class="post-card-title">Thumbnail unavailable</span>' +
-        '<span class="post-card-id">Drop JPEG into docs/images</span>' +
-        "</div>" +
-        "<figcaption>" + safeLabel + "</figcaption>";
+      var body = document.createElement("div");
+      body.className = "post-card-body";
+
+      var badge = document.createElement("span");
+      badge.className = "post-card-badge";
+      badge.textContent = "Offline media";
+
+      var title = document.createElement("span");
+      title.className = "post-card-title";
+      title.textContent = "Thumbnail unavailable";
+
+      var hint = document.createElement("span");
+      hint.className = "post-card-id";
+      hint.textContent = "Drop JPEG into docs/images";
+
+      var caption = document.createElement("figcaption");
+      caption.textContent = label;
+
+      body.appendChild(badge);
+      body.appendChild(title);
+      body.appendChild(hint);
+      figure.replaceChildren(body, caption);
     };
   </script>
 </body>
