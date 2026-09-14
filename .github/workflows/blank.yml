@@ -1,36 +1,167 @@
-# This is a basic workflow to help you get started with Actions
+# Gallery CI — structure, asset integrity, and static site smoke checks.
 
 name: CI
 
-# Controls when the workflow will run
 on:
-  # Triggers the workflow on push or pull request events but only for the "main" branch
   push:
-    branches: [ "main" ]
+    branches: ["main"]
+  # Run on every pull request (any base). The previous template only watched
+  # PRs into main, so branch-to-branch agent PRs never got a real check.
   pull_request:
-    branches: [ "main" ]
-
-  # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
 
-# A workflow run is made up of one or more jobs that can run sequentially or in parallel
+concurrency:
+  group: ci-${{ github.workflow }}-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: true
+
 jobs:
-  # This workflow contains a single job called "build"
   build:
-    # The type of runner that the job will run on
     runs-on: ubuntu-latest
-
-    # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
-      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
-      - uses: actions/checkout@v4
+      - name: Checkout
+        uses: actions/checkout@v4
 
-      # Runs a single command using the runners shell
-      - name: Run a one-line script
-        run: echo Hello, world!
-
-      # Runs a set of commands using the runners shell
-      - name: Run a multi-line script
+      - name: Validate gallery structure
         run: |
-          echo Add other actions to build,
-          echo test, and deploy your project.
+          set -euo pipefail
+          required=(
+            docs/index.html
+            docs/style.css
+            docs/.nojekyll
+            README.md
+            characters/green-eyed-woman/character-bible.md
+            characters/new-forest-spunk/character-bible.md
+          )
+          missing=0
+          for path in "${required[@]}"; do
+            if [[ ! -e "$path" ]]; then
+              echo "::error file=$path::Missing required path: $path"
+              missing=1
+            else
+              echo "OK  $path"
+            fi
+          done
+          exit "$missing"
+
+      - name: Validate docs image binaries
+        run: |
+          set -euo pipefail
+          python3 <<'PY'
+          from pathlib import Path
+          import sys
+
+          exts = {".jpg", ".jpeg", ".png", ".gif", ".webp"}
+          images = sorted(
+              p for p in Path("docs/images").glob("*")
+              if p.is_file() and p.suffix.lower() in exts
+          )
+          if not images:
+              print("No images under docs/images/ (OK if intentionally empty).")
+              sys.exit(0)
+
+          def is_image(data: bytes) -> bool:
+              return (
+                  data.startswith(b"\xff\xd8\xff")
+                  or data.startswith(b"\x89PNG\r\n\x1a\n")
+                  or data.startswith(b"GIF87a")
+                  or data.startswith(b"GIF89a")
+                  or (data.startswith(b"RIFF") and data[8:12] == b"WEBP")
+              )
+
+          fail = 0
+          for img in images:
+              data = img.read_bytes()
+              if not data:
+                  print(f"::error file={img}::Image file is empty")
+                  fail = 1
+                  continue
+              if not is_image(data):
+                  print(
+                      f"::error file={img}::Not a binary image. "
+                      "Did a base64 string get committed as text?"
+                  )
+                  fail = 1
+                  continue
+              print(f"OK  {img} ({len(data)} bytes)")
+          sys.exit(fail)
+          PY
+
+      - name: Validate local asset hrefs in docs/index.html
+        run: |
+          set -euo pipefail
+          python3 <<'PY'
+          from html.parser import HTMLParser
+          from pathlib import Path
+          import sys
+
+          root = Path("docs")
+          html = (root / "index.html").read_text(encoding="utf-8")
+
+          class Collector(HTMLParser):
+              def __init__(self):
+                  super().__init__()
+                  self.refs = []
+
+              def handle_starttag(self, tag, attrs):
+                  ad = dict(attrs)
+                  for key in ("href", "src"):
+                      if key in ad:
+                          self.refs.append(ad[key])
+
+          c = Collector()
+          c.feed(html)
+          fail = 0
+          for ref in c.refs:
+              if not ref or ref.startswith(("#", "http://", "https://", "data:", "mailto:", "//")):
+                  continue
+              path = ref.split("?", 1)[0].split("#", 1)[0]
+              target = (root / path).resolve()
+              try:
+                  target.relative_to(root.resolve())
+              except ValueError:
+                  print(f"::error file=docs/index.html::Ref escapes docs/: {ref}")
+                  fail = 1
+                  continue
+              if not target.exists():
+                  print(
+                      f"::error file=docs/index.html::"
+                      f"Missing local asset referenced by index.html: {ref}"
+                  )
+                  fail = 1
+              else:
+                  print(f"OK  local ref {ref}")
+          sys.exit(fail)
+          PY
+
+      - name: YAML workflow syntax check
+        run: |
+          set -euo pipefail
+          python3 <<'PY'
+          import sys
+          import subprocess
+          from pathlib import Path
+
+          try:
+              import yaml
+          except ImportError:
+              subprocess.check_call(
+                  [sys.executable, "-m", "pip", "install", "--quiet", "PyYAML"]
+              )
+              import yaml
+
+          fail = 0
+          for path in sorted(Path(".github/workflows").glob("*.yml")):
+              text = path.read_text(encoding="utf-8")
+              try:
+                  docs = list(yaml.safe_load_all(text))
+              except Exception as e:
+                  print(f"::error file={path}::Invalid workflow YAML: {e}")
+                  fail = 1
+                  continue
+              if not any(docs):
+                  print(f"::error file={path}::Workflow YAML is empty")
+                  fail = 1
+                  continue
+              print(f"OK  {path}")
+          sys.exit(fail)
+          PY
