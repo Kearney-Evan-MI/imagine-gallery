@@ -10,13 +10,9 @@ on:
     branches: ["main"]
     paths:
       - "docs/**"
-      - "characters/green-eyed-woman/character-bible.md"
-      - "characters/green-eyed-woman/prompts/kneeling-arms-outstretched.md"
-      - "characters/new-forest-spunk/character-bible.md"
-      - "characters/new-forest-spunk/versions/v1.0.0.md"
-      - "sessions/2026-08-01-green-eyed-woman.md"
-      - "sessions/2026-09-11-enable-github-pages.md"
-      - "sessions/2026-09-11-grok-post-ff0116d1.md"
+      - "characters/green-eyed-woman/**/*.md"
+      - "characters/new-forest-spunk/**/*.md"
+      - "sessions/**/*.md"
       - ".github/workflows/pages.yml"
   workflow_dispatch:
 

@@ -215,6 +215,7 @@
       var next = img.getAttribute("data-fallback");
       if (next && img.dataset.fallbackTried !== "1") {
         img.dataset.fallbackTried = "1";
+        img.removeAttribute("data-fallback");
         img.removeAttribute("srcset");
         img.removeAttribute("sizes");
         img.src = next;
