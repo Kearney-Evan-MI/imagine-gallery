@@ -24,6 +24,49 @@
     imagesizes="(max-width: 600px) 50vw, (max-width: 900px) 33vw, 280px"
     fetchpriority="high">
   <link rel="stylesheet" href="style.css">
+  <script>
+    window.galleryImgFallback = function (img) {
+      if (!img || img.dataset.fallbackApplied === "1") return;
+      var next = img.getAttribute("data-fallback");
+      if (next && img.dataset.fallbackTried !== "1") {
+        img.dataset.fallbackTried = "1";
+        img.removeAttribute("data-fallback");
+        img.removeAttribute("srcset");
+        img.removeAttribute("sizes");
+        img.src = next;
+        return;
+      }
+      img.dataset.fallbackApplied = "1";
+      var figure = img.closest("figure");
+      if (!figure) return;
+      figure.classList.add("post-card", "is-broken");
+      var label = img.getAttribute("alt") || "Image unavailable";
+      var body = document.createElement("div");
+      body.className = "post-card-body";
+      body.setAttribute("role", "img");
+      body.setAttribute("aria-label", label);
+
+      var badge = document.createElement("span");
+      badge.className = "post-card-badge";
+      badge.textContent = "Offline media";
+
+      var title = document.createElement("span");
+      title.className = "post-card-title";
+      title.textContent = "Thumbnail unavailable";
+
+      var hint = document.createElement("span");
+      hint.className = "post-card-id";
+      hint.textContent = "Drop JPEG into docs/images";
+
+      var caption = document.createElement("figcaption");
+      caption.textContent = label;
+
+      body.appendChild(badge);
+      body.appendChild(title);
+      body.appendChild(hint);
+      figure.replaceChildren(body, caption);
+    };
+  </script>
 </head>
 <body>
   <header>
@@ -212,49 +255,5 @@
   <footer>
     <p>Built with Grok Imagine · Character archive</p>
   </footer>
-
-  <script>
-    window.galleryImgFallback = function (img) {
-      if (!img || img.dataset.fallbackApplied === "1") return;
-      var next = img.getAttribute("data-fallback");
-      if (next && img.dataset.fallbackTried !== "1") {
-        img.dataset.fallbackTried = "1";
-        img.removeAttribute("data-fallback");
-        img.removeAttribute("srcset");
-        img.removeAttribute("sizes");
-        img.src = next;
-        return;
-      }
-      img.dataset.fallbackApplied = "1";
-      var figure = img.closest("figure");
-      if (!figure) return;
-      figure.classList.add("post-card", "is-broken");
-      var label = img.getAttribute("alt") || "Image unavailable";
-      var body = document.createElement("div");
-      body.className = "post-card-body";
-      body.setAttribute("role", "img");
-      body.setAttribute("aria-label", label);
-
-      var badge = document.createElement("span");
-      badge.className = "post-card-badge";
-      badge.textContent = "Offline media";
-
-      var title = document.createElement("span");
-      title.className = "post-card-title";
-      title.textContent = "Thumbnail unavailable";
-
-      var hint = document.createElement("span");
-      hint.className = "post-card-id";
-      hint.textContent = "Drop JPEG into docs/images";
-
-      var caption = document.createElement("figcaption");
-      caption.textContent = label;
-
-      body.appendChild(badge);
-      body.appendChild(title);
-      body.appendChild(hint);
-      figure.replaceChildren(body, caption);
-    };
-  </script>
 </body>
 </html>
