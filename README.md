@@ -27,13 +27,27 @@ Hampshire / Solent outdoor lock (messy curly hair, freckles, soft smirk, heatwav
 1. Tag the UUIDs or say “use the green-eyed woman from my imagine-gallery repo”
 2. Re-upload the original 4 photos if needed for perfect face lock
 3. Keep adding new generations here for version history
+4. For restyles and phenotype-locked prompts, use the skills in `skills/` (start with `imagine-restyle`)
 
 ## Structure
 - `characters/green-eyed-woman/` – bible, refs, prompts, gens
 - `characters/new-forest-spunk/` – bible + version notes
 - `sessions/` – dated chat logs
 - `docs/` – GitHub Pages gallery source
+- `skills/` – Grok Imagine prompt/restyle skills (canonical copies)
 - `integrations/grok-imagine-toolkit/` – imported xAI Grok Imagine image/video toolkit
+
+## Prompt / restyle skills
+
+The gallery now keeps the Imagine prompt cluster under `skills/`:
+
+- `skills/imagine-restyle` — identity-locked restyle of an existing frame or prompt
+- `skills/photoreal-phenotype-prompts` — new photoreal prompt with a regional lock
+- `skills/pretty-women-photorealism` — pretty without plastic/filter faces
+- `skills/pg13-topless-photorealism` — new PG-13 documentary generation
+- `skills/pg13-topless-restyle` — PG-13 restyle of an existing adult frame
+
+Copy a skill folder into a Grok session at `/home/workdir/.grok/skills/<name>/` to load it.
 
 ## Grok Imagine toolkit
 
