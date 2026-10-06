@@ -15,7 +15,7 @@ To add the JPEGs here permanently:
 | 3ae2d5d9-eb02-4c5c-8d1b-f211b5e9ede9 | Hands-and-knees living room | — |
 | 8ec48bcf-8671-4aec-bfd5-e60b66e6323a | Sitting on bed edge | — |
 | 2478a6de-8512-44ce-bf38-797a6a7e9e88 | Earlier kneeling | — |
-
+| 415d7d6f-ac6e-4995-b40e-cb12026eacce | Dorset Blue and yellow | - |
 Original 4 refs also available in the conversation history.
 
 ## Pending binary drop
