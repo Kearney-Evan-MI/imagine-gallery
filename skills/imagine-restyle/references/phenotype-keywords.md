@@ -1,5 +1,7 @@
 # Phenotype Keyword Banks
 
+Shared with photoreal-phenotype-prompts. Keep the two copies aligned.
+
 ## British / Southern English
 
 Primary locks:
