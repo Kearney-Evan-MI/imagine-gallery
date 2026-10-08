@@ -23,15 +23,25 @@ Young woman with:
 
 Hampshire / Solent outdoor lock (messy curly hair, freckles, soft smirk, heatwave jeans look). See `characters/new-forest-spunk/`.
 
+## Autumn 2026 cast
+
+Sixteen additional locks added 2026-10-08. Roster and bibles: `characters/README.md`.
+
+Hampshire / Dorset / Wiltshire: Clare, Hannah, Ruth, Kate. West of Ireland: Niamh. Dutch: Marit, Sanne, Lotte, Fleur. Northern French: Élise, Camille, Léa. Alpine Italian: Giulia, Chiara, Marta, Elena.
+
+Frame ids are in each bible. JPEGs are not in `docs/images/` yet, so the Pages site still renders the original two cards until those assets are dropped in.
+
 ## How to use with Grok
 1. Tag the UUIDs or say “use the green-eyed woman from my imagine-gallery repo”
 2. Re-upload the original 4 photos if needed for perfect face lock
 3. Keep adding new generations here for version history
 4. For restyles and phenotype-locked prompts, use the skills in `skills/` (start with `imagine-restyle`)
+5. For the autumn cast, name the slug (`characters/kate-hampshire/`) rather than a UUID
 
 ## Structure
 - `characters/green-eyed-woman/` – bible, refs, prompts, gens
 - `characters/new-forest-spunk/` – bible + version notes
+- `characters/` – autumn 2026 roster (sixteen bibles)
 - `sessions/` – dated chat logs
 - `docs/` – GitHub Pages gallery source
 - `skills/` – Grok Imagine prompt/restyle skills (canonical copies)
