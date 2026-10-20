@@ -7,6 +7,7 @@ This folder is the GitHub canonical copy for the Imagine cluster.
 
 | Skill | Use when |
 |-------|----------|
+| `grok-input` | Resolve a UUID, @tag, grok.com/imagine URL, slug, name, or skill into the JSON Grok needs |
 | `imagine-restyle` | Edit or restyle an existing frame or prompt while locking phenotype, bone structure, and camera distance |
 | `photoreal-phenotype-prompts` | Write a new photoreal prompt with a British / Dutch / French / North Italian lock |
 | `pretty-women-photorealism` | Keep attractiveness photographic instead of filter/stock/plastic |

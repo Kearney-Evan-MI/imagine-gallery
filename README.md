@@ -32,11 +32,16 @@ Hampshire / Dorset / Wiltshire: Clare, Hannah, Ruth, Kate. West of Ireland: Niam
 Frame ids are in each bible. JPEGs are not in `docs/images/` yet, so the Pages site still renders the original two cards until those assets are dropped in.
 
 ## How to use with Grok
-1. Tag the UUIDs or say “use the green-eyed woman from my imagine-gallery repo”
-2. Re-upload the original 4 photos if needed for perfect face lock
-3. Keep adding new generations here for version history
-4. For restyles and phenotype-locked prompts, use the skills in `skills/` (start with `imagine-restyle`)
-5. For the autumn cast, name the slug (`characters/kate-hampshire/`) rather than a UUID
+1. Resolve input to the JSON Grok needs:
+   `python3 scripts/resolve_grok_input.py "<uuid | @tag | grok.com/imagine URL | slug | name | skill>"`
+2. Return the `grok_return` object unchanged (bible, `imagine_tags`, skills). Do not invent frame ids.
+3. Tag those UUIDs / frame ids, or say “use the green-eyed woman from my imagine-gallery repo”
+4. Re-upload the original 4 photos if needed for perfect face lock
+5. Keep adding new generations here for version history
+6. For restyles and phenotype-locked prompts, use the skills in `skills/` (start with `grok-input`, then `imagine-restyle`)
+7. For the autumn cast, name the slug (`characters/kate-hampshire/`) rather than a UUID
+
+Live catalog (GitHub Pages): https://kearney-evan-mi.github.io/imagine-gallery/grok.json
 
 ## Structure
 - `characters/green-eyed-woman/` – bible, refs, prompts, gens
@@ -45,12 +50,15 @@ Frame ids are in each bible. JPEGs are not in `docs/images/` yet, so the Pages s
 - `sessions/` – dated chat logs
 - `docs/` – GitHub Pages gallery source
 - `skills/` – Grok Imagine prompt/restyle skills (canonical copies)
+- `scripts/resolve_grok_input.py` – maps Grok input to the JSON payload Grok needs
+- `docs/grok.json` – published catalog for Grok / Pages
 - `integrations/grok-imagine-toolkit/` – imported xAI Grok Imagine image/video toolkit
 
 ## Prompt / restyle skills
 
 The gallery now keeps the Imagine prompt cluster under `skills/`:
 
+- `skills/grok-input` — resolve UUID / @tag / URL / slug into the JSON Grok should use
 - `skills/imagine-restyle` — identity-locked restyle of an existing frame or prompt
 - `skills/photoreal-phenotype-prompts` — new photoreal prompt with a regional lock
 - `skills/pretty-women-photorealism` — pretty without plastic/filter faces

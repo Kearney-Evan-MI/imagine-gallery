@@ -1,5 +1,7 @@
 # Characters
 
+Grok should resolve a slug, name, frame id, or UUID with `python3 scripts/resolve_grok_input.py` and use the returned `grok_return` JSON (bible + `imagine_tags` + skills).
+
 Existing locks stay in place:
 
 - `green-eyed-woman/`
