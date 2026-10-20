@@ -4,6 +4,6 @@
 2. **Re-upload original 4 photos** into `characters/green-eyed-woman/refs/` (ask Grok to help once you download them)
 3. Enable Git LFS: `git lfs track "*.jpg" "*.png"` then push the actual images
 4. ~~Turn on GitHub Pages~~ **Done in-repo:** `.github/workflows/pages.yml` deploys `docs/`. Complete the one-time Settings → Pages → Source = **GitHub Actions** click if the site is not live yet.
-5. Ask Grok: “animate the latest post set” or “generate 3 more outfit variations and add them to the repo”
+5. Ask Grok: “animate the latest post set” or “generate 3 more outfit variations and add them to the repo” — Grok should run `python3 scripts/resolve_grok_input.py` first so it gets tags, bible, and skills back
 6. Create Issues for ideas: better freckles, different lighting, video, etc.
 7. Drop New Forest Spunk web thumbnails into `docs/images/` and replace the pending card on the gallery page

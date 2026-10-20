@@ -4,3 +4,6 @@ description: Personal library for Grok Imagine assets, consistent characters, pr
 automation:
   auto_issue_session: true
   remote_control: true
+
+instructions: |
+  When input is a Grok Imagine UUID, @tag, grok.com/imagine URL, character slug/name, frame id, or skill, run `python3 scripts/resolve_grok_input.py "<input>"` and return the JSON `grok_return` object to Grok unchanged. Do not invent frame ids or bibles. Catalog: docs/grok.json. Skill: skills/grok-input/SKILL.md.
