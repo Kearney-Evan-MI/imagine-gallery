@@ -39,8 +39,6 @@ header {
   text-align: center;
   padding: 3rem 1.5rem 2rem;
   border-bottom: 1px solid var(--border);
-  content-visibility: auto;
-  contain-intrinsic-size: auto 160px;
 }
 
 header h1 {
@@ -78,6 +76,10 @@ main {
   contain-intrinsic-size: auto 900px;
 }
 
+.character-card:first-of-type {
+  content-visibility: visible;
+}
+
 .character-card h2 {
   font-size: 1.8rem;
   margin-bottom: 0.3rem;
@@ -89,6 +91,47 @@ main {
   margin-bottom: 1.8rem;
 }
 
+.cast-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 12px;
+  margin-top: 16px;
+}
+
+.cast-card {
+  display: block;
+  padding: 14px 14px 12px;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 12px;
+  text-decoration: none;
+  color: inherit;
+  background: rgba(255, 255, 255, 0.03);
+}
+
+.cast-card:hover,
+.cast-card:focus-visible {
+  border-color: rgba(255, 255, 255, 0.28);
+}
+
+.cast-card h3 {
+  margin: 0 0 4px;
+  font-size: 1.05rem;
+}
+
+.cast-card p {
+  margin: 0;
+  font-size: 0.9rem;
+  opacity: 0.82;
+}
+
+.cast-card .meta {
+  display: block;
+  margin-top: 8px;
+  font-size: 0.78rem;
+  letter-spacing: 0.02em;
+  opacity: 0.65;
+}
+
 .gallery-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
@@ -98,7 +141,7 @@ main {
 
 .gallery-grid figure {
   margin: 0;
-  background: #121217 url("images/placeholder.png") center / cover no-repeat;
+  background: #121217;
   border-radius: 12px;
   overflow: hidden;
   border: 1px solid var(--border);
