@@ -94,9 +94,10 @@ The site is built from the static files in `docs/` and deployed by [`.github/wor
 ## Gallery performance
 The GitHub Pages site under `docs/` is tuned for mobile load speed:
 - Responsive Drive **thumbnail** URLs (`srcset` + `sizes`) instead of full-file `uc?export=view` links
-- LCP preload + `fetchpriority="high"` on the hero image; lazy-load for the rest
+- `preconnect` to `drive.google.com` and `lh3.googleusercontent.com` without `crossorigin` (image requests are no-cors)
+- Lazy-load + `fetchpriority="low"` on gallery images (they sit below the autumn cast grid)
 - Explicit `width`/`height` and CSS `aspect-ratio` to avoid layout shift
-- `content-visibility` / `contain` to reduce off-screen paint cost on long pages
+- `content-visibility` / `contain` on below-the-fold cards only; no extra CSS fetch of `placeholder.png`
 
 For the best results, replace remote images with optimized local WebP/JPEG files in `docs/images/`.
 
